@@ -20,6 +20,10 @@ namespace battleships
         private Stack<GameState> _state = new Stack<GameState>();
 
         private AIOption _aiSetting;
+
+        private UtilityFunctions _utilityFunctions;
+        private GameResources _gameResources;
+        private MenuController _menuController;
         /// <summary>
         /// Returns the current state of the game, indicating which screen is
         /// currently being used
@@ -60,13 +64,20 @@ namespace battleships
             }
         }
 
-        GameController()
+        public GameController()
         {
             //bottom state will be quitting. If player exits main menu then the game is over
             _state.Push(GameState.Quitting);
 
             //at the start the player is viewing the main menu
             _state.Push(GameState.ViewingMainMenu);
+        }
+
+        public GameController(UtilityFunctions pUtilityFunctions, GameResources pGameFunctions, MenuController pMenuController)
+        {
+            _utilityFunctions = pUtilityFunctions;
+            _gameResources = pGameFunctions;
+            _menuController = pMenuController;
         }
 
         /// <summary>
@@ -133,24 +144,24 @@ namespace battleships
         {
             if (showAnimation)
             {
-                AddExplosion(row, column);
+                _utilityFunctions.AddExplosion(row, column);
             }
 
-            Audio.PlaySoundEffect(GameSound("Hit"));
+            Audio.PlaySoundEffect(_gameResources.GameSound("Hit"));
 
-            DrawAnimationSequence();
+            _utilityFunctions.DrawAnimationSequence();
         }
 
         private void PlayMissSequence(int row, int column, bool showAnimation)
         {
             if (showAnimation)
             {
-                AddSplash(row, column);
+                _utilityFunctions.AddSplash(row, column);
             }
 
-            Audio.PlaySoundEffect(GameSound("Miss"));
+            Audio.PlaySoundEffect(_gameResources.GameSound("Miss"));
 
-            DrawAnimationSequence();
+            _utilityFunctions.DrawAnimationSequence();
         }
 
         /// <summary>
@@ -168,11 +179,11 @@ namespace battleships
 
             if (isHuman)
             {
-                Message = "You " + result.ToString();
+                _utilityFunctions.Message = "You " + result.ToString();
             }
             else
             {
-                Message = "The AI " + result.ToString();
+                _utilityFunctions.Message = "The AI " + result.ToString();
             }
 
             switch (result.Value)
@@ -180,14 +191,14 @@ namespace battleships
                 case ResultOfAttack.Destroyed:
                     PlayHitSequence(result.Row, result.Column, isHuman);
 
-                    Audio.PlaySoundEffect(GameSound("Sink"));
+                    Audio.PlaySoundEffect(_gameResources.GameSound("Sink"));
                     break;
                 case ResultOfAttack.GameOver:
                     PlayHitSequence(result.Row, result.Column, isHuman);
-                    Audio.PlaySoundEffect(GameSound("Sink"));
+                    Audio.PlaySoundEffect(_gameResources.GameSound("Sink"));
 
 
-                    while (Audio.SoundEffectPlaying(GameSound("Sink")))
+                    while (Audio.SoundEffectPlaying(_gameResources.GameSound("Sink")))
                     {
                         SwinGame.Delay(10);
                         SwinGame.RefreshScreen();
@@ -195,11 +206,11 @@ namespace battleships
 
                     if (HumanPlayer.IsDestroyed)
                     {
-                        Audio.PlaySoundEffect(GameSound("Lose"));
+                        Audio.PlaySoundEffect(_gameResources.GameSound("Lose"));
                     }
                     else
                     {
-                        Audio.PlaySoundEffect(GameSound("Winner"));
+                        Audio.PlaySoundEffect(_gameResources.GameSound("Winner"));
 
                     }
                     break;
@@ -210,7 +221,7 @@ namespace battleships
                     PlayMissSequence(result.Row, result.Column, isHuman);
                     break;
                 case ResultOfAttack.ShotAlready:
-                    Audio.PlaySoundEffect(GameSound("Error"));
+                    Audio.PlaySoundEffect(_gameResources.GameSound("Error"));
                     break;
             }
         }
@@ -300,15 +311,15 @@ namespace battleships
             switch (CurrentState)
             {
                 case GameState.ViewingMainMenu:
-                    HandleMainMenuInput();
+                    __menuController.HandleMainMenuInput();
 
                     break;
                 case GameState.ViewingGameMenu:
-                    HandleGameMenuInput();
+                    __menuController.HandleGameMenuInput();
 
                     break;
                 case GameState.AlteringSettings:
-                    HandleSetupMenuInput();
+                    _HandleSetupMenuInput();
 
                     break;
                 case GameState.Deploying:

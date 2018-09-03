@@ -40,6 +40,16 @@ namespace battleships
         public const int ANIMATION_CELLS = 7;
 
         public const int FRAMES_PER_CELL = 8;
+
+        private GameResources _gameResources;
+        private GameController _gameController;
+
+        public UtilityFunctions(GameResources pGameResources, GameController pGameController)
+        {
+            _gameResources = pGameResources;
+            _gameController = pGameController;
+        }
+
         /// <summary>
         /// Determines if the mouse is in a given rectangle.
         /// </summary>
@@ -207,7 +217,7 @@ namespace battleships
 
                 if (!small)
                 {
-                    SwinGame.DrawBitmap(GameImage(shipName), colLeft, rowTop);
+                    SwinGame.DrawBitmap(_gameResources.GameImage(shipName), colLeft, rowTop);
                 }
                 else
                 {
@@ -235,7 +245,7 @@ namespace battleships
         /// </summary>
         public void DrawMessage()
         {
-            SwinGame.DrawText(Message, MESSAGE_COLOR, GameFont("Courier"), FIELD_LEFT, MESSAGE_TOP);
+            SwinGame.DrawText(Message, MESSAGE_COLOR, _gameResources.GameFont("Courier"), FIELD_LEFT, MESSAGE_TOP);
         }
 
         /// <summary>
@@ -244,22 +254,22 @@ namespace battleships
 
         public void DrawBackground()
         {
-            switch (CurrentState)
+            switch (_gameController.CurrentState)
             {
                 case GameState.ViewingMainMenu:
                 case GameState.ViewingGameMenu:
                 case GameState.AlteringSettings:
                 case GameState.ViewingHighScores:
-                    SwinGame.DrawBitmap(GameImage("Menu"), 0, 0);
+                    SwinGame.DrawBitmap(_gameResources.GameImage("Menu"), 0, 0);
 
                     break;
                 case GameState.Discovering:
                 case GameState.EndingGame:
-                    SwinGame.DrawBitmap(GameImage("Discovery"), 0, 0);
+                    SwinGame.DrawBitmap(_gameResources.GameImage("Discovery"), 0, 0);
 
                     break;
                 case GameState.Deploying:
-                    SwinGame.DrawBitmap(GameImage("Deploy"), 0, 0);
+                    SwinGame.DrawBitmap(_gameResources.GameImage("Deploy"), 0, 0);
 
                     break;
                 default:
@@ -288,7 +298,7 @@ namespace battleships
             Sprite s;
             Bitmap imgObj;
 
-            imgObj = GameImage(image);
+            imgObj = _gameResources.GameImage(image);
             imgObj.SetCellDetails(40, 40, 3, 3, 7);
 
             AnimationScript animation;
@@ -335,7 +345,7 @@ namespace battleships
             for (i = 1; i <= ANIMATION_CELLS * FRAMES_PER_CELL; i++)
             {
                 UpdateAnimations();
-                DrawScreen();
+                _gameController.DrawScreen();
             }
         }
     }

@@ -9,22 +9,26 @@ namespace battleships
             //Opens a new Graphics Window
             SwinGame.OpenGraphicsWindow("Battle Ships", 800, 600);
 
-            //Load Resources
-            LoadResources();
+            GameResources gameResources = new GameResources();
+            GameController gameController = new GameController();
+            UtilityFunctions utilityFunctions = new UtilityFunctions();
 
-            SwinGame.PlayMusic(GameMusic("Background"));
+            //Load Resources
+            gameResources.LoadResources();
+
+            SwinGame.PlayMusic(gameResources.GameMusic("Background"));
 
             //Game Loop
             do
             {
-                HandleUserInput();
-                DrawScreen();
-            } while (!(SwinGame.WindowCloseRequested() == true | CurrentState == GameState.Quitting));
+                gameController.HandleUserInput();
+                gameController.DrawScreen();
+            } while (!(SwinGame.WindowCloseRequested() == true | gameController.CurrentState == GameState.Quitting));
 
             SwinGame.StopMusic();
 
             //Free Resources and Close Audio, to end the program.
-            FreeResources();
+            gameResources.FreeResources();
         }
     }
 }
