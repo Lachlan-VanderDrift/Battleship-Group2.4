@@ -75,6 +75,7 @@ namespace MyGame.src
 
         public void MenuControllerAdd(UtilityFunctions pUtilityFunctions, GameResources pGameResources, GameController pGameController)
         {
+            //this creates all the controllers necassary for this class
             _gameController = pGameController;
             _gameResources = pGameResources;
             _utilityFunctions = pUtilityFunctions;

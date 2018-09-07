@@ -15,6 +15,7 @@ namespace MyGame.src
 
         public void EndingGameControllerAdd(HighScoreController pHighScoreControl, UtilityFunctions pUtilityFunctions, GameController pGameController)
         {
+            //this method updates the controllers necassary for this class
             _utilityFunctions = pUtilityFunctions;
             _gameController = pGameController;
             _highScoreController = pHighScoreControl;

@@ -20,6 +20,7 @@ namespace MyGame.src
 
         public void HighScoreControllerAdd(UtilityFunctions pUtilityFunctions, GameController pGameControl, GameResources pGameResources)
         {
+            //this method creates all the controllers necassary for this class
             _gameResources = pGameResources;
             _gameController = pGameControl;
             _utilityFunctions = pUtilityFunctions;

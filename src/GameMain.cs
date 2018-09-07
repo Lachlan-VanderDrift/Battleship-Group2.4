@@ -11,6 +11,7 @@ namespace MyGame
             //Opens a new Graphics Window
             SwinGame.OpenGraphicsWindow("Battle Ships", 800, 600);
 
+            //creates all the controllers needed
             MenuController menuController = new MenuController();
             DiscoveryController discoveryController = new DiscoveryController();
             EndingGameController endingGameController = new EndingGameController();
@@ -20,6 +21,7 @@ namespace MyGame
             HighScoreController highScoreController = new HighScoreController();
             GameController gameController = new GameController(highScoreController, endingGameController, discoveryController, deploymentController, utilityFunctions, gameResources, menuController);
 
+            //adding the controllers to the specific classes
             utilityFunctions.UtilityFunctionsAdd(gameResources, gameController);
             highScoreController.HighScoreControllerAdd(utilityFunctions, gameController, gameResources);
             menuController.MenuControllerAdd(utilityFunctions, gameResources, gameController);

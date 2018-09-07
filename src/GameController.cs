@@ -68,6 +68,7 @@ namespace MyGame.src
 
         public GameController(HighScoreController pHighScoreController, EndingGameController pEndGameController, DiscoveryController pDiscoveryController, DeploymentController pDeploymentController, UtilityFunctions pUtilityFunctions, GameResources pGameResources, MenuController pMenuController)
         {
+            //this method creates all the controllers throughout the program to make them useable in this GameController Class
             _utilityFunctions = pUtilityFunctions;
             _gameResources = pGameResources;
             _menuController = pMenuController;
@@ -85,6 +86,7 @@ namespace MyGame.src
 
         public void UpdateGameControl(HighScoreController pHighScoreController, EndingGameController pEndGameController, DiscoveryController pDiscoveryController, DeploymentController pDeploymentController, UtilityFunctions pUtilityFunctions, GameResources pGameResources, MenuController pMenuController)
         {
+            //this was designed to update classes after they have been updated
             _utilityFunctions = pUtilityFunctions;
             _gameResources = pGameResources;
             _menuController = pMenuController;
@@ -156,6 +158,7 @@ namespace MyGame.src
 
         private void PlayHitSequence(int row, int column, bool showAnimation)
         {
+            //this method is designed so that once a ship has been hit, it adds an animation and a sound
             if (showAnimation)
             {
                 _utilityFunctions.AddExplosion(row, column);
@@ -168,6 +171,7 @@ namespace MyGame.src
 
         private void PlayMissSequence(int row, int column, bool showAnimation)
         {
+            //this method is designed so that once a player has missed, it adds an animation and a sound
             if (showAnimation)
             {
                 _utilityFunctions.AddSplash(row, column);

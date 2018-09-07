@@ -284,11 +284,13 @@ namespace MyGame.src
 
         public void AddExplosion(int row, int col)
         {
+            //this methods adds the "splash" animation
             AddAnimation(row, col, "Splash");
         }
 
         public void AddSplash(int row, int col)
         {
+            //this methods adds the "splash" animation
             AddAnimation(row, col, "Splash");
         }
 
@@ -296,6 +298,7 @@ namespace MyGame.src
         private List<Sprite> _Animations = new List<Sprite>();
         private void AddAnimation(int row, int col, string image)
         {
+            //this method is designed to add the required animations
             Sprite s;
             Bitmap imgObj;
 
@@ -315,6 +318,7 @@ namespace MyGame.src
 
         public void UpdateAnimations()
         {
+            //this method updates the animations so that when they are finish, it ends the animation
             List<Sprite> ended = new List<Sprite>();
             foreach (Sprite s in _Animations)
             {
@@ -334,6 +338,7 @@ namespace MyGame.src
 
         public void DrawAnimations()
         {
+            //this method simply draws the animations and displays them
             foreach (Sprite s in _Animations)
             {
                 SwinGame.DrawSprite(s);
@@ -342,6 +347,7 @@ namespace MyGame.src
 
         public void DrawAnimationSequence()
         {
+            //this method calls the updateanimations function to update the function and then redraws the screen
             int i;
             for (i = 1; i <= ANIMATION_CELLS * FRAMES_PER_CELL; i++)
             {
