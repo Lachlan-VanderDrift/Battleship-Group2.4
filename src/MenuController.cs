@@ -66,7 +66,6 @@ namespace MyGame.src
 
         private const int GAME_MENU_QUIT_BUTTON = 2;
         private static readonly Color MENU_COLOR = SwinGame.RGBAColor(2, 167, 252, 255);
-
         private static readonly Color HIGHLIGHT_COLOR = SwinGame.RGBAColor(1, 57, 86, 255);
 
         /// <summary>

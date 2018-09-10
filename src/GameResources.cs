@@ -11,6 +11,7 @@ namespace MyGame.src
     {
         private static void LoadFonts()
         {
+            //this generates the fonts
             NewFont("ArialLarge", "arial.ttf", 80);
             NewFont("Courier", "cour.ttf", 14);
             NewFont("CourierSmall", "cour.ttf", 8);
@@ -47,6 +48,7 @@ namespace MyGame.src
 
         private static void LoadSounds()
         {
+            //this generates the sounds
             NewSound("Error", "error.wav");
             NewSound("Hit", "hit.wav");
             NewSound("Sink", "sink.wav");
@@ -58,6 +60,7 @@ namespace MyGame.src
 
         private static void LoadMusic()
         {
+            //this generates the music
             NewMusic("Background", "horrordrone.mp3");
         }
 
@@ -69,6 +72,7 @@ namespace MyGame.src
 
         public static Font GameFont(string font)
         {
+            //this returns all the previously created fonts above
             return _Fonts[font];
         }
 
@@ -80,6 +84,7 @@ namespace MyGame.src
 
         public static Bitmap GameImage(string image)
         {
+            //this returns the images
             return _Images[image];
         }
 
@@ -91,6 +96,7 @@ namespace MyGame.src
 
         public static SoundEffect GameSound(string sound)
         {
+            //this returns the previously created sounds
             return _Sounds[sound];
         }
 
@@ -102,6 +108,7 @@ namespace MyGame.src
 
         public static Music GameMusic(string music)
         {
+            //this returns the music created above
             return _Music[music];
         }
 
@@ -124,8 +131,9 @@ namespace MyGame.src
 
         public static void LoadResources()
         {
-            int width = 0;
-            int height = 0;
+            //this method runs all the methods that return the created resources
+            int width;
+            int height;
 
             width = SwinGame.ScreenWidth();
             height = SwinGame.ScreenHeight();
@@ -158,6 +166,7 @@ namespace MyGame.src
 
         private static void ShowLoadingScreen()
         {
+            //this method generates and loads the loading screen
             _Background = SwinGame.LoadBitmap(SwinGame.PathToResource("SplashBack.png", ResourceKind.BitmapResource));
             SwinGame.DrawBitmap(_Background, 0, 0);
             SwinGame.RefreshScreen();
@@ -202,6 +211,7 @@ namespace MyGame.src
 
         private static void ShowMessage(string message, int number)
         {
+            //this method draws the game's messages
             const int TX = 310;
             const int TY = 493;
             const int TW = 200;
@@ -230,6 +240,7 @@ namespace MyGame.src
 
         private static void EndLoadingScreen(int width, int height)
         {
+            //this method runs the correct resources required for the end loading screen
             SwinGame.ProcessEvents();
             SwinGame.Delay(500);
             SwinGame.ClearScreen();
@@ -245,37 +256,44 @@ namespace MyGame.src
 
         private static void NewFont(string fontName, string filename, int size)
         {
+            //this adds any newly create fonts to a dictionary to hold all fonts
             _Fonts.Add(fontName, SwinGame.LoadFont(SwinGame.PathToResource(filename, ResourceKind.FontResource), size));
         }
 
         private static void NewImage(string imageName, string filename)
         {
+            //this adds any newly create images to a dictionary to hold all images
             _Images.Add(imageName, SwinGame.LoadBitmap(SwinGame.PathToResource(filename, ResourceKind.BitmapResource)));
         }
 
         private static void NewTransparentColorImage(string imageName, string fileName, Color transColor)
         {
+            //this adds an images with transparent colours to a dictionary to hold all images
             _Images.Add(imageName, SwinGame.LoadBitmap(SwinGame.PathToResource(fileName, ResourceKind.BitmapResource)));
             //SwinGame.load
         }
 
         private static void NewTransparentColourImage(string imageName, string fileName, Color transColor)
         {
+            //this calls a method to pass the image through to a dictionary
             NewTransparentColorImage(imageName, fileName, transColor);
         }
 
         private static void NewSound(string soundName, string filename)
         {
+            //this adds any newly create sounds to a dictionary to hold all sounds
             _Sounds.Add(soundName, Audio.LoadSoundEffect(SwinGame.PathToResource(filename, ResourceKind.SoundResource)));
         }
 
         private static void NewMusic(string musicName, string filename)
         {
+            //this adds any newly create fonts to a dictionary to hold all fonts music
             _Music.Add(musicName, Audio.LoadMusic(SwinGame.PathToResource(filename, ResourceKind.SoundResource)));
         }
 
         private static void FreeFonts()
         {
+            //this methods goes through all the fonts and creates an object for each one
             foreach (Font obj in _Fonts.Values)
             {
                 SwinGame.FreeFont(obj);
@@ -284,6 +302,7 @@ namespace MyGame.src
 
         private static void FreeImages()
         {
+            //this methods goes through all the images and deletes (frees) the object from memory
             foreach (Bitmap obj in _Images.Values)
             {
                 SwinGame.FreeBitmap(obj);
@@ -292,6 +311,7 @@ namespace MyGame.src
 
         private static void FreeSounds()
         {
+            //this methods goes through all the sounds and deletes (frees) the object from memory
             foreach (SoundEffect obj in _Sounds.Values)
             {
                 Audio.FreeSoundEffect(obj);
@@ -300,7 +320,11 @@ namespace MyGame.src
 
         private static void FreeMusic()
         {
+<<<<<<< HEAD
 
+=======
+            //this methods goes through all the music and deletes (frees) the object from memory
+>>>>>>> ea8dff5fd0438465e4aced3fed878cc129548b10
             foreach (Music obj in _Music.Values)
             {
                 Audio.FreeMusic(obj);
@@ -309,6 +333,7 @@ namespace MyGame.src
 
         public static void FreeResources()
         {
+            //this method basically runs the above methods that go towards deleteing (freeing) the object(s) from memory
             FreeFonts();
             FreeImages();
             FreeMusic();

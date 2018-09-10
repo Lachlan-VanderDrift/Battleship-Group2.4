@@ -120,6 +120,7 @@ namespace MyGame.src
 
         private static void PlayHitSequence(int row, int column, bool showAnimation)
         {
+            //this method is designed so that once a ship has been hit, it adds an animation and a sound
             if (showAnimation)
             {
                 UtilityFunctions.AddExplosion(row, column);
@@ -132,6 +133,7 @@ namespace MyGame.src
 
         private static void PlayMissSequence(int row, int column, bool showAnimation)
         {
+            //this method is designed so that once a player has missed, it adds an animation and a sound
             if (showAnimation)
             {
                 UtilityFunctions.AddSplash(row, column);
