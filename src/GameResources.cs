@@ -320,11 +320,7 @@ namespace MyGame.src
 
         private static void FreeMusic()
         {
-<<<<<<< HEAD
-
-=======
             //this methods goes through all the music and deletes (frees) the object from memory
->>>>>>> ea8dff5fd0438465e4aced3fed878cc129548b10
             foreach (Music obj in _Music.Values)
             {
                 Audio.FreeMusic(obj);
