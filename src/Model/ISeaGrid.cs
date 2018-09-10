@@ -23,7 +23,7 @@ namespace MyGame.src.Model
         /// <value>what the player can see at that location</value>
         /// <returns>what the player can see at that location</returns>
 
-        TileView Item(int x, int y);
+        TileView this[int row, int col] { get; }
         /// <summary>
         /// Mark the indicated tile as shot.
         /// </summary>

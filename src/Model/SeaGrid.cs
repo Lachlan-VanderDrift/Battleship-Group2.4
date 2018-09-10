@@ -11,7 +11,7 @@ namespace MyGame.src.Model
         private const int _WIDTH = 10;
 
         private const int _HEIGHT = 10;
-        private Tile[,] _GameTiles = new Tile[_WIDTH, _HEIGHT];
+        private Tile[,] _GameTiles;
         private Dictionary<ShipName, Ship> _Ships;
 
         private int _ShipsKilled = 0;
@@ -67,9 +67,13 @@ namespace MyGame.src.Model
         /// <param name="x">x coordinate of the tile</param>
         /// <param name="y">y coordiante of the tile</param>
         /// <returns></returns>
-        public TileView Item(int x, int y)
+        public TileView this[int x, int y]
         {
-            return _GameTiles[x, y].View;
+            get
+            {
+                return _GameTiles[x, y].View;
+            }
+            
         }
 
         /// <summary>
@@ -98,6 +102,7 @@ namespace MyGame.src.Model
         {
             //fill array with empty Tiles
             int i;
+            _GameTiles = new Tile[Width, Height];
 
             for (i = 0; i <= Width - 1; i++)
             {

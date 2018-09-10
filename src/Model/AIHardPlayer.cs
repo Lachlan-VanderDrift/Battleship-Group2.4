@@ -124,7 +124,7 @@ namespace MyGame.src.Model
                         throw new ApplicationException("AI has gone in an invalid state");
                 }
 
-            } while ((row < 0 || column < 0 || row >= EnemyGrid.Height || column >= EnemyGrid.Width || EnemyGrid.Item(row, column) != TileView.Sea));
+            } while ((row < 0 || column < 0 || row >= EnemyGrid.Height || column >= EnemyGrid.Width || EnemyGrid[row, column] != TileView.Sea));
             //while inside the grid and not a sea tile do the search
         }
 
@@ -375,7 +375,7 @@ namespace MyGame.src.Model
         private void AddTarget(int row, int column)
         {
 
-            if ((row >= 0 && column >= 0 && row < EnemyGrid.Height && column < EnemyGrid.Width && EnemyGrid.Item(row, column) == TileView.Sea))
+            if ((row >= 0 && column >= 0 && row < EnemyGrid.Height && column < EnemyGrid.Width && EnemyGrid[row, column] == TileView.Sea))
             {
                 _Targets.Push(new Target(new Location(row, column), _CurrentTarget.ShotAt));
             }

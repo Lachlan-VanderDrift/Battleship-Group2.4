@@ -7,22 +7,9 @@ using System.Threading.Tasks;
 
 namespace MyGame.src
 {
-    public class GameResources
+    public static class GameResources
     {
-        private Dictionary<string, Bitmap> _Images = new Dictionary<string, Bitmap>();
-        private Dictionary<string, Font> _Fonts = new Dictionary<string, Font>();
-        private Dictionary<string, SoundEffect> _Sounds = new Dictionary<string, SoundEffect>();
-
-        private Dictionary<string, Music> _Music = new Dictionary<string, Music>();
-        private Bitmap _Background;
-        private Bitmap _Animation;
-        private Bitmap _LoaderFull;
-        private Bitmap _LoaderEmpty;
-        private Font _LoadingFont;
-
-        //private SoundEffect _StartSound;
-
-        private void LoadFonts()
+        private static void LoadFonts()
         {
             NewFont("ArialLarge", "arial.ttf", 80);
             NewFont("Courier", "cour.ttf", 14);
@@ -30,7 +17,7 @@ namespace MyGame.src
             NewFont("Menu", "ffaccess.ttf", 8);
         }
 
-        private void LoadImages()
+        private static void LoadImages()
         {
             //Backgrounds
             NewImage("Menu", "main_page.jpg");
@@ -45,7 +32,7 @@ namespace MyGame.src
             NewImage("RandomButton", "deploy_randomize_button.png");
 
             //Ships
-            int i;
+            int i = 0;
             for (i = 1; i <= 5; i++)
             {
                 NewImage("ShipLR" + i, "ship_deploy_horiz_" + i + ".png");
@@ -58,7 +45,7 @@ namespace MyGame.src
 
         }
 
-        private void LoadSounds()
+        private static void LoadSounds()
         {
             NewSound("Error", "error.wav");
             NewSound("Hit", "hit.wav");
@@ -69,7 +56,7 @@ namespace MyGame.src
             NewSound("Lose", "lose.wav");
         }
 
-        private void LoadMusic()
+        private static void LoadMusic()
         {
             NewMusic("Background", "horrordrone.mp3");
         }
@@ -80,7 +67,7 @@ namespace MyGame.src
         /// <param name="font">Name of Font</param>
         /// <returns>The Font Loaded with this Name</returns>
 
-        public Font GameFont(string font)
+        public static Font GameFont(string font)
         {
             return _Fonts[font];
         }
@@ -91,7 +78,7 @@ namespace MyGame.src
         /// <param name="image">Name of image</param>
         /// <returns>The image loaded with this name</returns>
 
-        public Bitmap GameImage(string image)
+        public static Bitmap GameImage(string image)
         {
             return _Images[image];
         }
@@ -102,7 +89,7 @@ namespace MyGame.src
         /// <param name="sound">Name of sound</param>
         /// <returns>The sound with this name</returns>
 
-        public SoundEffect GameSound(string sound)
+        public static SoundEffect GameSound(string sound)
         {
             return _Sounds[sound];
         }
@@ -113,21 +100,32 @@ namespace MyGame.src
         /// <param name="music">Name of music</param>
         /// <returns>The music with this name</returns>
 
-        public Music GameMusic(string music)
+        public static Music GameMusic(string music)
         {
             return _Music[music];
         }
 
+        private static Dictionary<string, Bitmap> _Images = new Dictionary<string, Bitmap>();
+        private static Dictionary<string, Font> _Fonts = new Dictionary<string, Font>();
+        private static Dictionary<string, SoundEffect> _Sounds = new Dictionary<string, SoundEffect>();
 
+        private static Dictionary<string, Music> _Music = new Dictionary<string, Music>();
+        private static Bitmap _Background;
+        private static Bitmap _Animation;
+        private static Bitmap _LoaderFull;
+        private static Bitmap _LoaderEmpty;
+        private static Font _LoadingFont;
+
+        //private static SoundEffect _StartSound;
         /// <summary>
         /// The Resources Class stores all of the Games Media Resources, such as Images, Fonts
         /// Sounds, Music.
         /// </summary>
 
-        public void LoadResources()
+        public static void LoadResources()
         {
-            int width;
-            int height;
+            int width = 0;
+            int height = 0;
 
             width = SwinGame.ScreenWidth();
             height = SwinGame.ScreenHeight();
@@ -158,7 +156,7 @@ namespace MyGame.src
             EndLoadingScreen(width, height);
         }
 
-        private void ShowLoadingScreen()
+        private static void ShowLoadingScreen()
         {
             _Background = SwinGame.LoadBitmap(SwinGame.PathToResource("SplashBack.png", ResourceKind.BitmapResource));
             SwinGame.DrawBitmap(_Background, 0, 0);
@@ -175,17 +173,24 @@ namespace MyGame.src
             PlaySwinGameIntro();
         }
 
-        private void PlaySwinGameIntro()
+        private static void PlaySwinGameIntro()
         {
+            const int ANI_X = 143;
+            const int ANI_Y = 134;
+            const int ANI_W = 546;
+            const int ANI_H = 327;
+            const int ANI_V_CELL_COUNT = 6;
             const int ANI_CELL_COUNT = 11;
 
             //Audio.PlaySoundEffect(_StartSound);
             SwinGame.Delay(200);
 
-            int i;
+            int i = 0;
             for (i = 0; i <= ANI_CELL_COUNT - 1; i++)
             {
                 SwinGame.DrawBitmap(_Background, 0, 0);
+                //SwinGame.DrawBitmapPart(_Animation, (i / ANI_V_CELL_COUNT) * ANI_W, (i % ANI_V_CELL_COUNT) * ANI_H, ANI_W, ANI_H, ANI_X, ANI_Y);
+                SwinGame.DrawBitmap(_Animation, (i / ANI_V_CELL_COUNT) * ANI_W, (i % ANI_V_CELL_COUNT) * ANI_H);
                 SwinGame.Delay(20);
                 SwinGame.RefreshScreen();
                 SwinGame.ProcessEvents();
@@ -195,7 +200,7 @@ namespace MyGame.src
 
         }
 
-        private void ShowMessage(string message, int number)
+        private static void ShowMessage(string message, int number)
         {
             const int TX = 310;
             const int TY = 493;
@@ -205,27 +210,25 @@ namespace MyGame.src
             const int BG_X = 279;
             const int BG_Y = 453;
 
-            int fullW;
-            Rectangle toDraw = new Rectangle();
+            int fullW = 0;
 
             fullW = 260 * number / STEPS;
             SwinGame.DrawBitmap(_LoaderEmpty, BG_X, BG_Y);
-            SwinGame.DrawCell(_LoaderFull, 0, BG_X, BG_Y);
-            // SwinGame.DrawBitmapPart(_LoaderFull, 0, 0, fullW, 66, BG_X, BG_Y)
+            //SwinGame.DrawBitmapPart(_LoaderFull, 0, 0, fullW, 66, BG_X, BG_Y);
 
+            Rectangle toDraw = new Rectangle();
             toDraw.X = TX;
             toDraw.Y = TY;
             toDraw.Width = TW;
             toDraw.Height = TH;
-            //SwinGame.DrawTextLines(message, Color.White, Color.Transparent, _LoadingFont, FontAlignment.AlignCenter, toDraw);
+
             SwinGame.DrawText(message, Color.White, Color.Transparent, _LoadingFont, FontAlignment.AlignCenter, toDraw);
-            // SwinGame.DrawTextLines(message, Color.White, Color.Transparent, _LoadingFont, FontAlignment.AlignCenter, TX, TY, TW, TH)
 
             SwinGame.RefreshScreen();
             SwinGame.ProcessEvents();
         }
 
-        private void EndLoadingScreen(int width, int height)
+        private static void EndLoadingScreen(int width, int height)
         {
             SwinGame.ProcessEvents();
             SwinGame.Delay(500);
@@ -240,37 +243,38 @@ namespace MyGame.src
             SwinGame.ChangeScreenSize(width, height);
         }
 
-        private void NewFont(string fontName, string filename, int size)
+        private static void NewFont(string fontName, string filename, int size)
         {
             _Fonts.Add(fontName, SwinGame.LoadFont(SwinGame.PathToResource(filename, ResourceKind.FontResource), size));
         }
 
-        private void NewImage(string imageName, string filename)
+        private static void NewImage(string imageName, string filename)
         {
             _Images.Add(imageName, SwinGame.LoadBitmap(SwinGame.PathToResource(filename, ResourceKind.BitmapResource)));
         }
 
-        private void NewTransparentColorImage(string imageName, string fileName, Color transColor)
+        private static void NewTransparentColorImage(string imageName, string fileName, Color transColor)
         {
             _Images.Add(imageName, SwinGame.LoadBitmap(SwinGame.PathToResource(fileName, ResourceKind.BitmapResource)));
+            //SwinGame.load
         }
 
-        private void NewTransparentColourImage(string imageName, string fileName, Color transColor)
+        private static void NewTransparentColourImage(string imageName, string fileName, Color transColor)
         {
             NewTransparentColorImage(imageName, fileName, transColor);
         }
 
-        private void NewSound(string soundName, string filename)
+        private static void NewSound(string soundName, string filename)
         {
             _Sounds.Add(soundName, Audio.LoadSoundEffect(SwinGame.PathToResource(filename, ResourceKind.SoundResource)));
         }
 
-        private void NewMusic(string musicName, string filename)
+        private static void NewMusic(string musicName, string filename)
         {
             _Music.Add(musicName, Audio.LoadMusic(SwinGame.PathToResource(filename, ResourceKind.SoundResource)));
         }
 
-        private void FreeFonts()
+        private static void FreeFonts()
         {
             foreach (Font obj in _Fonts.Values)
             {
@@ -278,7 +282,7 @@ namespace MyGame.src
             }
         }
 
-        private void FreeImages()
+        private static void FreeImages()
         {
             foreach (Bitmap obj in _Images.Values)
             {
@@ -286,7 +290,7 @@ namespace MyGame.src
             }
         }
 
-        private void FreeSounds()
+        private static void FreeSounds()
         {
             foreach (SoundEffect obj in _Sounds.Values)
             {
@@ -294,15 +298,16 @@ namespace MyGame.src
             }
         }
 
-        private void FreeMusic()
+        private static void FreeMusic()
         {
+
             foreach (Music obj in _Music.Values)
             {
                 Audio.FreeMusic(obj);
             }
         }
 
-        public void FreeResources()
+        public static void FreeResources()
         {
             FreeFonts();
             FreeImages();
