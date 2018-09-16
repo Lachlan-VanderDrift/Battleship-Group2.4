@@ -123,7 +123,7 @@ namespace MyGame.src
         private static Bitmap _LoaderEmpty;
         private static Font _LoadingFont;
 
-        //private static SoundEffect _StartSound;
+        private static SoundEffect _StartSound;
         /// <summary>
         /// The Resources Class stores all of the Games Media Resources, such as Images, Fonts
         /// Sounds, Music.
@@ -174,7 +174,7 @@ namespace MyGame.src
 
             _Animation = SwinGame.LoadBitmap(SwinGame.PathToResource("SwinGameAni.jpg", ResourceKind.BitmapResource));
             _LoadingFont = SwinGame.LoadFont(SwinGame.PathToResource("arial.ttf", ResourceKind.FontResource), 12);
-            //_StartSound = Audio.LoadSoundEffect(SwinGame.PathToResource("SwinGameStart.ogg", ResourceKind.SoundResource));
+            _StartSound = Audio.LoadSoundEffect(SwinGame.PathToResource("SwinGameStart.ogg", ResourceKind.SoundResource));
 
             _LoaderFull = SwinGame.LoadBitmap(SwinGame.PathToResource("loader_full.png", ResourceKind.BitmapResource));
             _LoaderEmpty = SwinGame.LoadBitmap(SwinGame.PathToResource("loader_empty.png", ResourceKind.BitmapResource));
@@ -191,7 +191,7 @@ namespace MyGame.src
             const int ANI_V_CELL_COUNT = 6;
             const int ANI_CELL_COUNT = 11;
 
-            //Audio.PlaySoundEffect(_StartSound);
+            Audio.PlaySoundEffect(_StartSound);
             SwinGame.Delay(200);
 
             int i = 0;
@@ -312,10 +312,7 @@ namespace MyGame.src
         private static void FreeSounds()
         {
             //this methods goes through all the sounds and deletes (frees) the object from memory
-            foreach (SoundEffect obj in _Sounds.Values)
-            {
-                Audio.FreeSoundEffect(obj);
-            }
+            Audio.ReleaseAllSoundEffects();
         }
 
         private static void FreeMusic()
