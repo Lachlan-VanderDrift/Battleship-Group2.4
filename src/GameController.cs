@@ -75,6 +75,9 @@ namespace MyGame.src
             //create the players
             switch (_aiSetting)
             {
+                case AIOptions.Easy:
+                    _ai = new AIEasyPlayer(_theGame);
+                    break;
                 case AIOptions.Medium:
                     _ai = new AIMediumPlayer(_theGame);
                     break;
