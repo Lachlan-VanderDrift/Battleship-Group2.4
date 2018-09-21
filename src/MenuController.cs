@@ -308,11 +308,11 @@ namespace MyGame.src
             switch (button)
             {
                 case SETUP_MENU_EASY_BUTTON:
-                    GameController.SetDifficulty(AIOptions.Hard);
+                    GameController.SetDifficulty(AIOptions.Easy);
 
                     break;
                 case SETUP_MENU_MEDIUM_BUTTON:
-                    GameController.SetDifficulty(AIOptions.Hard);
+                    GameController.SetDifficulty(AIOptions.Medium);
 
                     break;
                 case SETUP_MENU_HARD_BUTTON:
