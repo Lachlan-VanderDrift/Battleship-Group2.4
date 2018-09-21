@@ -198,7 +198,6 @@ namespace MyGame.src
             for (i = 0; i <= ANI_CELL_COUNT - 1; i++)
             {
                 SwinGame.DrawBitmap(_Background, 0, 0);
-                //SwinGame.DrawBitmapPart(_Animation, (i / ANI_V_CELL_COUNT) * ANI_W, (i % ANI_V_CELL_COUNT) * ANI_H, ANI_W, ANI_H, ANI_X, ANI_Y);
                 SwinGame.DrawBitmap(_Animation, (i / ANI_V_CELL_COUNT) * ANI_W, (i % ANI_V_CELL_COUNT) * ANI_H);
                 SwinGame.Delay(20);
                 SwinGame.RefreshScreen();
@@ -250,7 +249,6 @@ namespace MyGame.src
             SwinGame.FreeBitmap(_Animation);
             SwinGame.FreeBitmap(_LoaderEmpty);
             SwinGame.FreeBitmap(_LoaderFull);
-            //Audio.FreeSoundEffect(_StartSound);
             SwinGame.ChangeScreenSize(width, height);
         }
 
