@@ -41,6 +41,7 @@ namespace MyGame.src
             //SwinGame.DrawTextLines(whatShouldIPrint, Color.White, Color.Transparent, gameResources.GameFont(strHolder), FontAlignment.AlignCenter, toDraw);
 
             SwinGame.DrawText(whatShouldIPrint, Color.White, Color.Transparent, GameResources.GameFont(strHolder), FontAlignment.AlignCenter, toDraw);
+            SwinGame.DrawText("Click to Continue", Color.White, Color.Transparent, GameResources.GameFont(strHolder), FontAlignment.AlignCenter - 5, toDraw);
         }
 
         /// <summary>

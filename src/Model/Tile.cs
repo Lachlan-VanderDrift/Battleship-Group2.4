@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SwinGameSDK;
 
 namespace MyGame.src.Model
 {
@@ -16,7 +17,7 @@ namespace MyGame.src.Model
         private Ship _Ship = null;
         //the tile has been shot at
         private bool _Shot = false;
-
+      
         /// <summary>
         /// Has the tile been shot?
         /// </summary>
@@ -47,7 +48,7 @@ namespace MyGame.src.Model
         {
             get { return _ColumnValue; }
         }
-
+        
         /// <summary>
         /// Ship allows for a tile to check if there is ship and add a ship to a tile
         /// </summary>
@@ -56,6 +57,7 @@ namespace MyGame.src.Model
             get { return _Ship; }
             set
             {
+
                 if (_Ship == null)
                 {
                     _Ship = value;
@@ -63,10 +65,15 @@ namespace MyGame.src.Model
                     {
                         _Ship.AddTile(this);
                     }
+
+                    SwinGame.RefreshScreen();
                 }
                 else
                 {
-                    throw new InvalidOperationException("There is already a ship at [" + Row + ", " + Column + "]");
+                    string error = "There is already a ship at [" + Row + ", " + Column + "]";
+                    
+                    throw new ApplicationException(error);
+                    
                 }
             }
         }
