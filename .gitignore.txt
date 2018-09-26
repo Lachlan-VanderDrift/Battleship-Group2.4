@@ -1,4 +1,5 @@
 bin
 tmp
+lib
 out.log
 .DS_Store

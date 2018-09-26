@@ -344,6 +344,7 @@ namespace MyGame.src
                     DiscoveryController.DrawDiscovery();
                     break;
                 case GameState.EndingGame:
+                    DiscoveryController.DrawDiscovery();
                     EndingGameController.DrawEndOfGame();
                     break;
                 case GameState.ViewingHighScores:
